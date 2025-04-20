@@ -17,7 +17,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} codeflex.ai - All rights reserved
+              © {new Date().getFullYear()} MYFITNESS.ai - All rights reserved
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-2 text-sm">
