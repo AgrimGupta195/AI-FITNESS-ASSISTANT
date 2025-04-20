@@ -4,14 +4,20 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { vapi } from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const GenerateProgramPage = () => {
+  type Message = {
+    content: string;
+    role: "assistant" | "user"; // Or any other roles you might have
+  };
+  
   const [callActive, setCallActive] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [callEnded, setCallEnded] = useState(false);
 
   const { user } = useUser();
@@ -78,15 +84,23 @@ const GenerateProgramPage = () => {
       console.log("AI stopped Speaking");
       setIsSpeaking(false);
     };
-    const handleMessage = (message: any) => {
+    type MessageInput = {
+      type: "transcript";
+      transcriptType: "final";
+      transcript: string;
+      role: "assistant" | "user"; // Or whatever roles you need
+    };
+    const handleMessage = (message: MessageInput) => {
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { content: message.transcript, role: message.role };
         setMessages((prev) => [...prev, newMessage]);
       }
     };
+        
 
-    const handleError = (error: any) => {
-      console.log("Vapi Error", error);
+    const handleError = (error: unknown) => {
+      console.log("Error:", error);
+      
       setConnecting(false);
       setCallActive(false);
     };
@@ -181,8 +195,10 @@ const GenerateProgramPage = () => {
 
                 <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10"></div>
-                  <img
+                  <Image
                     src="/ai-avatar.png"
+                    width={100}
+                    height={100}
                     alt="AI Assistant"
                     className="w-full h-full object-cover"
                   />
@@ -218,9 +234,11 @@ const GenerateProgramPage = () => {
           <Card className={`bg-card/90 backdrop-blur-sm border overflow-hidden relative`}>
             <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
               <div className="relative size-32 mb-4">
-                <img
-                  src={user?.imageUrl}
+                <Image
+                  src={user?.imageUrl||"/ai-avatar.png"}
                   alt="User"
+                  width={100}
+                  height={100}
                   className="size-full object-cover rounded-full"
                 />
               </div>
@@ -245,7 +263,7 @@ const GenerateProgramPage = () => {
               {messages.map((msg, index) => (
                 <div key={index} className="message-item animate-fadeIn">
                   <div className="font-semibold text-xs text-muted-foreground mb-1">
-                    {msg.role === "assistant" ? "CodeFlex AI" : "You"}:
+                    {msg.role === "assistant" ? "AI Fitness Coach" : "You"}:
                   </div>
                   <p className="text-foreground">{msg.content}</p>
                 </div>
