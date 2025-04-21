@@ -24,8 +24,8 @@ FitnessAI transforms personal training through AI-powered voice conversations, c
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/fitnessai.git
-cd fitnessai
+git https://github.com/AgrimGupta195/AI-FITNESS-ASSISTANT.git
+cd AI-FITNESS-ASSISTANT
 ```
 
 2. **Install dependencies**
