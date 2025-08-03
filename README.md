@@ -7,7 +7,6 @@ FitnessAI transforms personal training through AI-powered voice conversations, c
 - 🎯 **Personalized Fitness Plans** - AI-generated workout routines based on your goals
 - 🗣️ **Voice Interaction** - Natural conversations with AI fitness coach
 - 🍎 **Custom Diet Plans** - Nutrition guidance tailored to your needs
-- 👥 **Community Gallery** - Browse other users' fitness programs
 - 🔐 **User Authentication** - Secure login and profile management
 - ⚡ **Real-time Interaction** - Live voice feedback and program generation
 
@@ -56,7 +55,6 @@ yarn dev
 - **Voice-Based Program Generation**: Talk to the AI assistant to create your personalized fitness plan
 - **Real-time Interaction**: Get immediate feedback and adjustments during your conversation
 - **Profile Management**: Track your fitness journey and access your personalized programs
-- **Program Gallery**: Explore AI-generated programs from other users for inspiration
 
 ## 🔒 Environment Variables
 
